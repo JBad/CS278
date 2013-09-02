@@ -23,6 +23,13 @@ public class Dropbox {
 		reactor_.addHandler(new DropboxFileEventHandler(filemgr,states,protocol_));
 	}
 	
+	public Dropbox(HazelcastTransport transport_, 
+			DropboxProtocol protocol_, FileReactor reactor_) {
+		this.reactor_ = reactor_;
+		this.transport_ = transport_;
+		this.protocol_	= protocol_;
+	}
+	
 	public void connect(String server) throws Exception {
 		transport_.connect(server);
 		reactor_.start();

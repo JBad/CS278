@@ -15,6 +15,12 @@ public class DropboxProtocol {
 	
 	private final DropboxCmdProcessor cmdProcessor_;
 
+	public DropboxProtocol(DropboxTransport transport, DropboxCmdProcessor cmdProcessor) {
+		transport_ = transport;
+		cmdProcessor_ = cmdProcessor;
+		transport_.addListener(cmdProcessor_);
+	}
+	
 	public DropboxProtocol(DropboxTransport transport, FileStates states, FileManager filemgr) {
 		transport_ = transport;
 		cmdProcessor_ = new DropboxCmdProcessor(states,filemgr);
@@ -47,7 +53,7 @@ public class DropboxProtocol {
 
 		publish(cmd);
 	}
-
+	
 	public void removeFile(Path p) {
 		DropboxCmd cmd = new DropboxCmd();
 		cmd.setOpCode(OpCode.REMOVE);

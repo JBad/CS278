@@ -13,7 +13,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FileStates {
 
-	private Map<String, FileState> states_ = new ConcurrentHashMap<>();
+	private Map<String, FileState> states_;
+	
+	public FileStates() {
+		states_ = new ConcurrentHashMap<>();
+	}
+	
+	public FileStates(Map<String,FileState> states_) {
+		this.states_ = states_;
+	}
 
 	public FileState getState(Path p){
 		String key = p.toAbsolutePath().toString();
